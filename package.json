@@ -1,0 +1,37 @@
+{
+  "name": "audit",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot src/index.ts",
+    "dev:web": "bun --hot src/index.ts",
+    "dev:server": "bun --watch apps/server/src/main.ts",
+    "dev:cli": "bun ./apps/cli/src/index.ts",
+    "dev:mcp": "bun ./apps/mcp-server/src/index.ts",
+    "cli": "bun ./apps/cli/src/index.ts",
+    "build": "bun run build:web",
+    "build:web": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+    "build:server": "bun run --filter '@audit/server' build",
+    "start": "NODE_ENV=production bun src/index.ts",
+    "check:workspaces": "bun pm ls",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prisma": "6"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+}

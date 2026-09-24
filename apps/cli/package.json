@@ -1,0 +1,16 @@
+{
+  "name": "@audit/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "audit": "src/index.ts"
+  },
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "audit": "bun src/index.ts"
+  },
+  "dependencies": {
+    "commander": "^15.0.0"
+  }
+}
