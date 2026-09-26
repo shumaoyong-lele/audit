@@ -20,7 +20,7 @@
     },
     "apps/cli": {
       "name": "@audit/cli",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "bin": {
         "audit": "src/index.ts",
       },
@@ -30,18 +30,18 @@
     },
     "apps/desktop": {
       "name": "@audit/desktop",
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     "apps/mcp-server": {
       "name": "@audit/mcp-server",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@modelcontextprotocol/sdk": "^1.30.1",
       },
     },
     "apps/server": {
       "name": "@audit/server",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@nestjs/common": "^12.1.0",
         "@nestjs/config": "^12.0.1",
@@ -60,23 +60,23 @@
     },
     "packages/api-client": {
       "name": "@audit/api-client",
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     "packages/config": {
       "name": "@audit/config",
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     "packages/schemas": {
       "name": "@audit/schemas",
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     "packages/types": {
       "name": "@audit/types",
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     "packages/ui": {
       "name": "@audit/ui",
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
   },
   "packages": {

@@ -1,12 +1,13 @@
 {
   "name": "@audit/server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "bun --watch src/main.ts",
     "build": "tsc -p tsconfig.json",
-    "test": "bun test"
+    "test": "bun test",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json"
   },
   "dependencies": {
     "@nestjs/common": "^12.1.0",

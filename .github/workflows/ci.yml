@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: audit
+          POSTGRES_PASSWORD: audit
+          POSTGRES_DB: audit_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U audit -d audit_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://audit:audit@localhost:5432/audit_test?schema=public
+      TEST_DATABASE_URL: postgresql://audit:audit@localhost:5432/audit_test?schema=public
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Validate Prisma schema
+        run: bunx prisma validate
+
+      - name: Apply database migrations
+        run: bunx prisma migrate deploy
+
+      - name: Run server unit and HTTP integration tests
+        run: bun run --filter '@audit/server' test
+
+      - name: Type-check server and tests
+        run: bun run --filter '@audit/server' typecheck
+
+      - name: Build API server
+        run: bun run build:server
+
+      - name: Build review desk
+        run: bun run build:web
